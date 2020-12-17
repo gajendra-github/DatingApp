@@ -1,0 +1,130 @@
+> Microsoft.EntityFrameworkCore (package that closely matches your runtime)
+> Microsoft.EntityFrameworkCore.Sqlite
+> NuGet Gallery
+
+EF
+An object relational mapper (ORM)
+
+Translates our code into SQL commands that update our tables in the database.
+
+PRIOR .NET 3.5 (Original .NET Framework)
+We often used to write something called ADP.NET code to save or retrieve application data
+from an underlying database. We have to open a connection to the database, create a data set
+to fetch or submit the data, then convert data from the data set to dot net objects.
+
+It was cumbersome and error prone process because we would be writing that database access code
+as sql code which would be in the form of strings and it's very easy to make mistakes.
+So Microsoft has provided a Framework called EF to automate all these database related activities
+for ur application.
+
+
+PROS
+- open a connection to database
+- create a data set to fetch or submit the data
+- convert data from the data set to dot net objects.
+CONS
+- cumbersome 
+- error prone
+- writing sql code in the form of strings as database access code
+
+
+
+#   When we add EF we need to create an important class that derives from db context
+    class that we get with EF. This class acts as a bridge between our domain or entity classes and the
+    database. And this db context class is the primary class that we use for interacting with our database.
+
+#   EF allows us to write linq queries 
+#   EF works with database providers.
+#   SQLite - we don't need to install a database server and SQLite just uses a file to store our database.
+#   SQLite is not production worthy, but is a great database for development because it is very portable.
+    we don't need to install anything and simply adds a file into our project. 
+#   SQL server is not cross platform but SQLite will work on any OS.
+#   SQLite provider or database provider is responsible for translating linq query to sql command. 
+
+EF Features:
+-   Querying        (allows us to query our database using linq queries)
+-   Change Tracking (keep track of changes ocuring in our entities which need to be submitted to the database)
+-   Saving          (allows us to save the database and EF will execute insert update and delete commands to    
+                    the database as the dbcontext class gives us a save changes method. )
+-   Concurrency     It uses optimistic concurrency by default to protect overwriting changes made by another user,
+                    since was fetched from the database.
+                    It also deals with transaction and it provide automatic transaction management while Querying
+                    and saving data.
+
+-   Caching         Also includes first level caching out of the box, so repeated Querying will return data from
+                    the cache instead of hitting the database.
+
+-   Built-in
+    Conventions     EF follows conventions and includes a set of default rules which automatically configure
+                    the EF schema or the model we use to create our database.
+
+                    (e.g. ID propery should be named as Id or ID)
+
+-   Configuration   We can also configure our entities and there is ways to configure these so that we can 
+                    override the conventions. 
+
+-   MIgrations      Gives us ability to create database schema so that when we start our application or we run
+                    a particular command, we can automatically generate our database in our database server. 
+
+                    These are pretty powerful and are convenient because they take a look at our code that  
+                    we write and then creates the appropriate database that we need for the database schema 
+                    that we need to manage our database so we dont need to create our database manually 
+                    EF do this for us. (Code First)
+
+A DbContext instance represents a session with the database and can be used to query and save instances
+of your entities. DbContext is a combination of the Unit Of work and Repository patterns. 
+
+Typically you create a class that derives from DbContext and contains DbSet<TEntity> properties for each entity 
+in the model. 
+
+Entity Framework Core Tools for the .NET Command-Line interface.
+----------------------------------------------------------------
+$ dotnet tool install --global dotnet-ef --version 5.0.0
+
+$ dotnet ef migrations add InitialCreate -o Data/Migrations
+  (Migration will look at our classes and create a database schema or the code to create a database based on our 
+  code that we have written so far.) 
+
+  (Error: Your startup project 'XYZ' doesn't reference Microsoft.EntityFrameworkCore.Design. This package is required
+  for the Entity Framework Core Tools to work. Ensure your startup project is correct, install the package and try again)
+
+  $ dotnet ef database update
+    (Error:
+    The Entity Framework tools version 5.0.0 is oler than that of the runtime 5.0.1. Update the tools
+    for the latest Features and bug fixes.
+    dotnet ef --version
+    dotnet tool update --global dotnet-ef
+
+    )
+
+GIT:
+(is a free and open source distributed version control system designed to handle everything from
+small to very large projects with speed and efficiency)
+
+-   it gives us a backup of our code.
+-   it gives us version control and we can see a history of our code
+-   it makes our code sharable.
+-   we can publish our code into an open source git repository
+-   source code repository where we can share our code with others, get feedback from others,
+    we can collaborate with others.
+
+
+
+1.  $   git init
+2.  $   dotnet new gitignore
+        (it is ignoring bin and obj folder, check gitignore file, it will show
+        all the files from that has been excluded from source control.
+        Which means it is not going to be tracked by our source control and will
+        not be pushed into our public repository that anybody can see.        
+        )
+3.  
+
+
+
+
+
+
+
+
+
+
